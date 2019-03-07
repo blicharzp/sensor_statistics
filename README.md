@@ -1,8 +1,7 @@
 # Sensor Statistics Task
 
 ## Requirements 
-`docker` installed
-
+`docker` installed  
 `docker-compose` optional
 
 ## How to run 
@@ -22,7 +21,7 @@ To run service:
 ```
 docker-compose run -v `<PATH/FOR/DIRECTORY/WITH/CSV/FILES>:<CUSTOM/PATH/IN/CONTAINER/TO/MOUNT>` sensor_statistics sbt
 ```
-The most recommended location is to mount it in `/home/interviewer/` custom directory.
+The most recommended location is to mount it in `/home/interviewer/` custom directory.  
 To run code:
 ```
 run <PATH/TO/DIRECTORY>

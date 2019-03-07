@@ -1,6 +1,6 @@
 FROM openjdk:11.0.1
 
-LABEL Name=time_converter
+LABEL Name=sensor_statistics
 
 ARG UID
 ARG GID

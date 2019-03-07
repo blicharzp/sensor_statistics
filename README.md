@@ -1,7 +1,10 @@
 # Sensor Statistics Task
 
+## Used open source libraries
+`scalaz-stream` source - "https://github.com/scalaz/scalaz-stream"  
+
 ## Requirements 
-`docker` installed  
+`docker` optional (recommended)  
 `docker-compose` optional
 
 ## How to run 
@@ -21,7 +24,11 @@ To run service:
 ```
 docker-compose run -v `<PATH/FOR/DIRECTORY/WITH/CSV/FILES>:<CUSTOM/PATH/IN/CONTAINER/TO/MOUNT>` sensor_statistics sbt
 ```
-The most recommended location is to mount it in `/home/interviewer/` custom directory.  
+The most recommended location is to mount it in `/home/interviewer/<DIRNAME>` directory.  
+For example to mount `data` catalog into `/home/interviewer/data` use:
+```
+docker-compose run -v $(pwd)/data:/home/interviewer/data sensor_statistics sbt
+```
 To run code:
 ```
 run <PATH/TO/DIRECTORY>

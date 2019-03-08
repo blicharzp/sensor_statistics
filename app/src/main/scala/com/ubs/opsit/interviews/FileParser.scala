@@ -7,17 +7,19 @@ import scala.collection.mutable.Map
 
 object FileParser {
     var collectedData = scala.collection.mutable.Map[String,Option[Int]]()
+    var globalMeasurment = GlobalMeasurement
     
     def parse(filepaths: List[String]): Unit = { 
         filepaths foreach parseFile
-        println(collectedData)
+        println(globalMeasurment.allMeasurement)
+        println(globalMeasurment.failedMeasurement)
     }
 
     private def parseFile(filepath: String): Unit = {
         io.linesR(filepath)
           .drop(1)
           .map(row => toTuple(row.split(",")))
-          .map(row => collectedData += row)
+          .map{ case (_, measurement) => globalMeasurment.add(measurement) }
           .run
           .run
     }
@@ -28,6 +30,6 @@ object FileParser {
 
     private def convertMeasurement(measurement: String): Option[Int] = measurement match {
         case "NaN" => None
-        case measurement => Some[Int](measurement.toInt)
+        case measurement => Some(measurement.toInt)
     }
 }

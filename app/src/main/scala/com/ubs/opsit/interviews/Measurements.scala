@@ -33,29 +33,6 @@ class SensorMeasurement {
 }
 
 
-object SensorMeasurement {
-    implicit def ordering: Ordering[SensorMeasurement] = new Ordering[SensorMeasurement] {
-        override def compare(first: SensorMeasurement, second: SensorMeasurement): Int = {
-            compareAverage(first.avg, second.avg)
-        }
-
-        private def compareAverage(first: Option[Double], second: Option[Double]): Int = first match {
-            case _ if first == None && second == None => 0
-            case _ if first == None => -1
-            case _ if second == None => 1
-            case _ => cmp(first.get, second.get)
-        }
-        
-        private def cmp(first: Double, second: Double): Int = {
-            if(first >= second) {
-                return 1
-            }
-            return -1
-        }
-    }
-}
-
-
 object GlobalMeasurement {
     var allMeasurement: Int = 0
     var failedMeasurement: Int = 0

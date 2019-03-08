@@ -40,7 +40,7 @@ object FileParser {
     }
 
     private def present(numberOfFiles: Int): Unit = {
-        val sortedData = collectedData.toSeq.sortBy(_._2.avg).reverse
+        val sortedData = collectedData.toSeq.sortBy(_._2.avg)(Ordering[Option[Double]].reverse)
         println("Num of processed files: %s".format(numberOfFiles))
         println("Num of processed measurements: %s".format(GlobalMeasurement.allMeasurement))
         println("Num of failed measurements: %s\n".format(GlobalMeasurement.failedMeasurement))

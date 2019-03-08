@@ -2,7 +2,7 @@ package com.ubs.opsit.interviews
 
 import java.io.File
 
-case object FilenameCollector {
+object FilenameCollector {
     def collect(path: String): List[String] = {
         try {
             new File(path).listFiles

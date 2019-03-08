@@ -1,42 +1,30 @@
 package com.ubs.opsit.interviews
 
 class SensorMeasurement {
-    var min: Option[Int] = None
-    var max: Option[Int] = None
-    var sum: Int = 0
-    var elements: Option[Int] = None
-
-    def avg: Option[Double] = {
-        elements match {
-            case Some(count) => Some(sum.toDouble / count)
-            case None => None
-        }
-    }
+    // min, max, sum, number of elements, tuple4 used instead of case class to avoid conversion
+    type SensorData = Tuple4[Int,Int,Int,Int]
+    var data: Option[SensorData] = None  
 
     def add(measurement: Option[Int]): Unit = measurement match {
-        case Some(value) => handle(value)
+        case Some(validMeasurement) => handle(validMeasurement)
         case None => Unit
     }
 
-    private def handle(value: Int): Unit = {
-        sum += value
-        val count = elements getOrElse(0) + 1
-        if (count == 1) {
-            computeForFirstElement(value)
-        } else {
-            compute(value)
+    private def handle(measurement: Int): Unit = {
+        data match {
+            case Some(currentData) => compute(measurement, currentData)
+            case None => data = Some(measurement, measurement, measurement, 1)
         }
-        elements = Some(count)
-    }
-    
-    private def computeForFirstElement(value: Int): Unit = {
-        min = Some(value)
-        max = Some(value)
     }
 
-    private def compute(value: Int): Unit = value match {
-        case value if value >= max.get => max = Some(value)
-        case value if value <= min.get => min = Some(value)
+    private def compute(measurement: Int, currentData: SensorData): Unit = {
+        val (min, max, sum, numberOfElements) = currentData
+        measurement match {
+            case measurement if measurement >= max =>
+                data = Some(min, measurement, sum + measurement, numberOfElements + 1)
+            case measurement if measurement <= min =>
+                data = Some(measurement, max, sum + measurement, numberOfElements + 1)
+        }
     }
 }
 
@@ -45,8 +33,8 @@ object GlobalMeasurement {
     var allMeasurement: Int = 0
     var failedMeasurement: Int = 0
     def add(measurement: Option[Int]): Unit = measurement match {
-        case Some(_) => allMeasurement+= 1
-        case None => allMeasurement+= 1
-                     failedMeasurement+= 1
+        case Some(_) => allMeasurement += 1
+        case None => allMeasurement += 1
+                     failedMeasurement += 1
     }
 }

@@ -1,13 +1,11 @@
 package com.ubs.opsit.interviews
 
-import scalaz.stream._
-import scalaz.concurrent._
+import scalaz.stream.io
 
 import scala.collection.mutable.ListMap
 import scala.language.implicitConversions
 
 object FileParser {
-    type Sensor = Tuple2[String,SensorMeasurement]
     var collectedData = scala.collection.mutable.ListMap[String,SensorMeasurement]()
 
     def process(filepaths: List[String]): Unit = {
@@ -40,10 +38,10 @@ object FileParser {
     }
 
     private def present(numberOfFiles: Int): Unit = {
-        val sortedData = collectedData.toSeq.sortBy(_._2.avg)(Ordering[Option[Double]].reverse)
+        val sortedData = collectedData.toSeq.sortBy(_._2.avg)(Ordering[Option[Float]].reverse)
         println("Num of processed files: %s".format(numberOfFiles))
-        println("Num of processed measurements: %s".format(GlobalMeasurement.allMeasurement))
-        println("Num of failed measurements: %s\n".format(GlobalMeasurement.failedMeasurement))
+        println("Num of processed measurements: %s".format(GlobalMeasurement.allMeasurements))
+        println("Num of failed measurements: %s\n".format(GlobalMeasurement.failedMeasurements))
         println("Sensors with highest avg humidity:\n")
         println("sensor-id,min,avg,max")
         sortedData foreach {

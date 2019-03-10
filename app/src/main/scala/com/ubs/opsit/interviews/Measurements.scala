@@ -4,7 +4,7 @@ class SensorMeasurement {
     // [min, max, sum, numberOfElements], Tuple4 used instead of case class to avoid conversion
     type SensorData = Tuple4[Int,Int,Int,Int]
     var data: Option[SensorData] = None
-    lazy val avg: Option[Double] = average
+    lazy val avg: Option[Float] = average
 
     def add(measurement: Option[Int]): Unit = measurement match {
         case Some(validMeasurement) => handle(validMeasurement)
@@ -23,22 +23,24 @@ class SensorMeasurement {
                 data = Some(min, measurement, sum + measurement, numberOfElements + 1)
             case measurement if measurement <= min =>
                 data = Some(measurement, max, sum + measurement, numberOfElements + 1)
+            case measurement =>
+                data = Some(min, max, sum + measurement, numberOfElements + 1)
         }
     }
 
-    private def average: Option[Double] = data match {
-        case Some((_,_,sum, numberOfElements)) => Some(sum.toDouble / numberOfElements)
+    private def average: Option[Float] = data match {
+        case Some((_,_,sum, numberOfElements)) => Some(sum.toFloat / numberOfElements)
         case None => None
     }
 }
 
 
 object GlobalMeasurement {
-    var allMeasurement: Int = 0
-    var failedMeasurement: Int = 0
+    var allMeasurements: Int = 0
+    var failedMeasurements: Int = 0
     def add(measurement: Option[Int]): Unit = measurement match {
-        case Some(_) => allMeasurement += 1
-        case None => allMeasurement += 1
-                     failedMeasurement += 1
+        case Some(_) => allMeasurements += 1
+        case None => allMeasurements += 1
+                     failedMeasurements += 1
     }
 }

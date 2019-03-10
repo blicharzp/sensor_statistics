@@ -9,8 +9,8 @@ RUN addgroup --gid $GID interviewer_group && \
     adduser --uid $UID --disabled-password --gecos "" --force-badname --ingroup interviewer_group interviewer && \
     mkdir -p "/home/interviewer/app"
 
-ENV SCALA_VERSION 2.12.8 
-ENV SBT_VERSION 1.2.7
+ENV SCALA_VERSION 2.12.7
+ENV SBT_VERSION 1.2.8
 
 RUN \
   curl -fsL https://downloads.typesafe.com/scala/$SCALA_VERSION/scala-$SCALA_VERSION.tgz | tar xfz - -C /root/ && \

@@ -2,6 +2,7 @@
 
 ## Used open source libraries
 `scalaz-stream` source - "https://github.com/scalaz/scalaz-stream"  
+`ScalaTest` source -https://github.com/scalatest/scalatest
 
 ## Requirements 
 `docker` optional (recommended)  
@@ -38,7 +39,7 @@ Example usage:
 ```
 docker run -it -v $(pwd)/app:/home/interviewer/app -v $(pwd)/data:/home/interviewer/data -v $(pwd)/sbt/.ivy:/home/interviewer/.ivy -v $(pwd)/sbt/.ivy2:/home/interviewer/.ivy2 -v $(pwd)/sbt/.sbt:/home/interviewer/.sbt sensor_statistics sbt
 ```
-Run for selected in example mounting point for *.csv files:
+Run for selected in example mounting point for *.csv files in `sbt` prompt:
 ```
 run /home/interviewer/data
 ```
@@ -57,7 +58,7 @@ Example usage:
 ```
 docker-compose run -v $(pwd)/data:/home/interviewer/data sensor_statistics sbt
 ```
-Run for selected in example mounting point for *.csv files:
+Run for selected in example mounting point for *.csv files in `sbt` prompt:
 ```
 run /home/interviewer/data
 ```

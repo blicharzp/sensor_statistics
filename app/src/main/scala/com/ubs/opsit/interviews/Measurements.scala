@@ -34,8 +34,7 @@ class SensorMeasurement {
     }
 }
 
-
-object GlobalMeasurement {
+class GlobalMeasurement {
     var allMeasurements: Int = 0
     var failedMeasurements: Int = 0
     def add(measurement: Option[Int]): Unit = measurement match {
@@ -44,3 +43,18 @@ object GlobalMeasurement {
                      failedMeasurements += 1
     }
 }
+
+object MeasurementConverter {
+    def convert(measurement: Array[String]): Tuple2[String, Option[Int]] = measurement match {
+        case Array(sensor, humidity, _*) => (sensor, convertHumidity(humidity))
+    }
+
+    private def convertHumidity(humidity: String): Option[Int] = humidity match {
+        case "NaN" => None
+        case humidity => Some(humidity.toInt)
+    }
+}
+
+case class Measurements(globalMeasurement: GlobalMeasurement,
+                        sensors: Seq[(String, SensorMeasurement)],
+                        fileNumber: Int)

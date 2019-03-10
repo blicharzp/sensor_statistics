@@ -6,7 +6,7 @@
 
 ## Requirements 
 `docker` optional (recommended)  
-`docker-compose` optional
+`docker-compose` optional (recommended)
 
 ## How to run
 

@@ -19,11 +19,7 @@ To run container (it will take a moment, sbt needs to download whole dependencie
 ```
 docker run -it -v $(pwd)/app:/home/interviewer/app -v `<PATH/FOR/DIRECTORY/WITH/CSV/FILES>:<CUSTOM/PATH/IN/CONTAINER/TO/MOUNT>` sensor_statistics sbt
 ```
-The most recommended location is `/home/interviewer/<DIRNAME>` directory.  
-To run code:
-```
-run <PATH/TO/DIRECTORY>
-```
+The most recommended location (examples in this readme uses this location) is `/home/interviewer/<DIRNAME>` directory.  
 Remember to mount directory with data and use `<CUSTOM/PATH/IN/CONTAINER/TO/MOUNT>` path as a parameter and pass it as a parameter.  
 To simplify process of `sbt` dependency collection, you can add this 3 mounting points (already done if you are using `docker-compose`):
 ```
@@ -61,4 +57,18 @@ docker-compose run -v $(pwd)/data:/home/interviewer/data sensor_statistics sbt
 Run for selected in example mounting point for *.csv files in `sbt` prompt:
 ```
 run /home/interviewer/data
+```
+
+### Usage
+To run application in `sbt` prompt:
+```
+run <PATH/TO/DIRECTORY>
+```
+To run tests in `sbt` prompt:
+```
+test
+```
+For usage in `bash` prompt:
+```
+sbt run <PATH/TO/DIRECTORY> / sbt test
 ```

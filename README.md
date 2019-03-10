@@ -54,7 +54,7 @@ Example usage:
 ```
 docker-compose run -v $(pwd)/data:/home/interviewer/data sensor_statistics sbt
 ```
-Run for selected in example mounting point for *.csv files in `sbt` prompt:
+Run for selected in example mounting point:
 ```
 run /home/interviewer/data
 ```

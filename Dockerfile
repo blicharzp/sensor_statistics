@@ -5,8 +5,8 @@ LABEL Name=sensor_statistics
 ARG UID
 ARG GID
 
-RUN addgroup --gid $GID interviewer_group &&\
-    adduser --uid $UID --disabled-password --gecos "" --force-badname --ingroup interviewer_group interviewer &&\
+RUN addgroup --gid $GID interviewer_group && \
+    adduser --uid $UID --disabled-password --gecos "" --force-badname --ingroup interviewer_group interviewer && \
     mkdir -p "/home/interviewer/app"
 
 ENV SCALA_VERSION 2.12.8 
@@ -30,6 +30,7 @@ RUN \
   echo "case object Temp" > Temp.scala && \
   sbt compile && \
   rm -r project && rm build.sbt && rm Temp.scala && rm -r target
+
 
 WORKDIR /home/interviewer/app
 USER interviewer

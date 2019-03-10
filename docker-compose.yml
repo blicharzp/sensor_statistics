@@ -6,3 +6,6 @@ services:
     build: .
     volumes:
       - ./app:/home/interviewer/app:rw
+      - ./sbt/.ivy:/home/interviewer/.ivy:rw
+      - ./sbt/.ivy2:/home/interviewer/.ivy2:rw
+      - ./sbt/.sbt:/home/interviewer/.sbt:rw
